@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,6 +68,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $now = Carbon::now()->toDateString();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -74,7 +77,8 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'country' => $data['country'],
             'gender' => $data['gender'],
-            'birthday' => $data['birthday']
+            'birthday' => $data['birthday'],
+            'visit_date' => $now
         ]);
     }
 }
